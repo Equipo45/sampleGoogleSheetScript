@@ -105,8 +105,10 @@ function appendValue(column,range,value,sheets) {
   sheets.spreadsheets.values.append({
     spreadsheetId: process.env.SHEET_ID,
     range: `${column}${range}`,
-    valueInputOption: 'RAW',
-    resource: value,
+    valueInputOption: 'USER_ENTERED',
+    resource: {
+      'values':[[value]]
+    },
   })
 }
 
