@@ -6,7 +6,6 @@ const monitor = async () => {
     let range = 2
     const metalObject = await parseMetalObject()
     range = await nextAvailibleRange(range)
-    parseMetalRequestSheet(range,metalObject)
+    await parseMetalRequestSheet(range,metalObject)
 }
-
-monitor()
+setInterval(monitor(),24 * 60 * 60 * 1000)

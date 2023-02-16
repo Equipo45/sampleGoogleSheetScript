@@ -74,17 +74,21 @@ async function authorize() {
 async function nextAvailibleRange(range) {
   const client = await authorize()
   const sheets = google.sheets({version: 'v4', auth:client});
-  const res = await sheets.spreadsheets.values.get({
+  let res = await sheets.spreadsheets.values.get({
     spreadsheetId: process.env.SHEET_ID,
     range: `A${range}:E${range}`,
   });
-  const rows = res.data.values;
-  if (!rows || rows.length === 0) {
-    console.log('Writing in row ' + range);
-    return range;
-  } else {
+  let rows = res.data.values;
+  while (rows) {
     range++
+    res = await sheets.spreadsheets.values.get({
+      spreadsheetId: process.env.SHEET_ID,
+      range: `A${range}:E${range}`,
+    });
+    rows = res.data.values;
   }
+  console.log('Writing in row ' + range);
+  return range;
 }
 async function parseMetalRequestSheet(range,metalObjet) {
   const client = await authorize()

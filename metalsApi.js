@@ -17,15 +17,15 @@ async function parseMetalObject() {
     const rates = data.rates
     const metalsObject = {
         date : new Date().toISOString().trim(),
-        goldPrice : rates.XAU.toFixed(5),
-        silverPrice : rates.XAG.toFixed(5),
-        paladiumPrice : rates.XPD.toFixed(5),
-        platinumPrice : rates.XPT.toFixed(5),
-        aluminiumPrice : rates.ALU.toFixed(5),
-        tinPrice : rates.TIN.toFixed(5),
-        tungstenPrice : rates.TUNGSTEN.toFixed(5),
-        uraniumPrice : rates.URANIUM.toFixed(5),
-        zincPrice : rates.ZNC.toFixed(5)
+        goldPrice : rates.XAU.toFixed(5).replace(".",","),
+        silverPrice : rates.XAG.toFixed(5).replace(".",","),
+        paladiumPrice : rates.XPD.toFixed(5).replace(".",","),
+        platinumPrice : rates.XPT.toFixed(5).replace(".",","),
+        aluminiumPrice : rates.ALU.toFixed(5).replace(".",","),
+        tinPrice : rates.TIN.toFixed(5).replace(".",","),
+        tungstenPrice : rates.TUNGSTEN.toFixed(5).replace(".",","),
+        uraniumPrice : rates.URANIUM.toFixed(5).replace(".",","),
+        zincPrice : rates.ZNC.toFixed(5).replace(".",",")
     }
 
     return metalsObject
