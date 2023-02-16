@@ -3,6 +3,7 @@ const path = require('path');
 const process = require('process');
 const {authenticate} = require('@google-cloud/local-auth');
 const {google} = require('googleapis');
+require("dotenv").config()
 
 // If modifying these scopes, delete token.json.
 const SCOPES = ['https://www.googleapis.com/auth/spreadsheets'];
@@ -74,7 +75,7 @@ async function nextAvailibleRange(range) {
   const client = await authorize()
   const sheets = google.sheets({version: 'v4', auth:client});
   const res = await sheets.spreadsheets.values.get({
-    spreadsheetId: '1rZY472KVF31PG221dSJIgH-UtY3vJGOG2vS-hsdvV-0',
+    spreadsheetId: process.env.SHEET_ID,
     range: `A${range}:E${range}`,
   });
   const rows = res.data.values;
@@ -102,7 +103,7 @@ async function parseMetalRequestSheet(range,metalObjet) {
 
 function appendValue(column,range,value,sheets) {
   sheets.spreadsheets.values.append({
-    spreadsheetId: '1rZY472KVF31PG221dSJIgH-UtY3vJGOG2vS-hsdvV-0',
+    spreadsheetId: process.env.SHEET_ID,
     range: `${column}${range}`,
     valueInputOption: 'RAW',
     resource: value,
